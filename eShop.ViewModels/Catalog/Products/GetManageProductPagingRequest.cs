@@ -1,11 +1,11 @@
-﻿using eShop.Application.Catalog.DTOS;
+﻿using eShop.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eShop.Application.Catalog.Products.DTOS.Manage
+namespace eShop.ViewModels.Catalog.Products
 {
-    public class GetProductPagingRequest : PagingRequestBase
+    public class GetManageProductPagingRequest : PagingRequestBase
     {
         public string Keyword { get; set; }
         public List<int> CategoryIds { get; set; }

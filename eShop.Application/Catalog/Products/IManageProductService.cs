@@ -1,9 +1,5 @@
-﻿using eShop.Application.Catalog.DTOS;
-using eShop.Application.Catalog.Products.DTOS;
-using eShop.Application.Catalog.Products.DTOS.Manage;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using eShop.ViewModels.Catalog.Products;
+using eShop.ViewModels.Common;
 using System.Threading.Tasks;
 
 namespace eShop.Application.Catalog.Products
@@ -20,6 +16,6 @@ namespace eShop.Application.Catalog.Products
 
         //Task<List<ProductViewModel>> GetAll();
 
-        Task<PagedViewModel<ProductViewModel>> GetAllPaging(GetProductPagingRequest reqest);
+        Task<PagedViewModel<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest reqest);
     }
 }

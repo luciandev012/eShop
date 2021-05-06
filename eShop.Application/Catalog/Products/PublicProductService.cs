@@ -15,6 +15,36 @@ namespace eShop.Application.Catalog.Products
         {
             _context = context;
         }
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pc in _context.ProductCategories on p.Id equals pc.ProductId
+                        join c in _context.Categories on pc.CategoryId equals c.Id
+                        select new { p, pt, pc };
+           
+            //Paging
+            int totalRow = await query.CountAsync();
+            var data = await query.Select(x => new ProductViewModel()
+                {
+                    Id = x.p.Id,
+                    Price = x.p.Price,
+                    Name = x.pt.Name,
+                    Description = x.pt.Description,
+                    DateCreated = x.p.DateCreated,
+                    Details = x.pt.Details,
+                    LanguageId = x.pt.LanguageId,
+                    OriginalPrice = x.p.OriginalPrice,
+                    SeoAlias = x.pt.SeoAlias,
+                    SeoDescription = x.pt.SeoDescription,
+                    SeoTitle = x.pt.SeoTitle,
+                    Stock = x.p.Stock,
+                    ViewCount = x.p.ViewCount
+                }).ToListAsync();
+            return data;
+        }
+
         public async Task<PagedViewModel<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             //Select join from table
